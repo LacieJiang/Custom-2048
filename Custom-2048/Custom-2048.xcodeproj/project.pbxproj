@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4796865A1951835200FB6A99 /* NumberTileGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479686591951835200FB6A99 /* NumberTileGameViewController.swift */; };
+		4796865C195183B800FB6A99 /* TileAppearanceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4796865B195183B800FB6A99 /* TileAppearanceProvider.swift */; };
 		47C67161194FCEFB00F29BB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C67160194FCEFB00F29BB8 /* AppDelegate.swift */; };
 		47C67166194FCEFB00F29BB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C67164194FCEFB00F29BB8 /* Main.storyboard */; };
 		47C67168194FCEFB00F29BB8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C67167194FCEFB00F29BB8 /* Images.xcassets */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		479686591951835200FB6A99 /* NumberTileGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTileGameViewController.swift; sourceTree = "<group>"; };
+		4796865B195183B800FB6A99 /* TileAppearanceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileAppearanceProvider.swift; sourceTree = "<group>"; };
 		47C6715B194FCEFB00F29BB8 /* Custom-2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Custom-2048.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C6715F194FCEFB00F29BB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47C67160194FCEFB00F29BB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				47C6717E194FD05A00F29BB8 /* ViewController.swift */,
+				479686591951835200FB6A99 /* NumberTileGameViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				47C67186194FDEA200F29BB8 /* MoveOrder.swift */,
 				47C67188194FF35D00F29BB8 /* GameModel.swift */,
 				47C6718A195006CE00F29BB8 /* QueueCommand.swift */,
+				4796865B195183B800FB6A99 /* TileAppearanceProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,6 +254,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				47C67181194FD05A00F29BB8 /* ViewController.swift in Sources */,
+				4796865A1951835200FB6A99 /* NumberTileGameViewController.swift in Sources */,
+				4796865C195183B800FB6A99 /* TileAppearanceProvider.swift in Sources */,
 				47C67187194FDEA200F29BB8 /* MoveOrder.swift in Sources */,
 				47C67185194FDD5500F29BB8 /* TileModel.swift in Sources */,
 				47C67183194FD08900F29BB8 /* MergeTile.swift in Sources */,
@@ -441,6 +449,7 @@
 				47C67179194FCEFB00F29BB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		47C6717A194FCEFB00F29BB8 /* Build configuration list for PBXNativeTarget "Custom-2048Tests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +458,7 @@
 				47C6717C194FCEFB00F29BB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
