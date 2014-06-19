@@ -8,8 +8,14 @@
 
 import UIKit
 
-class TileAppearanceProvider: NSObject {
-  func tileColorFor(value: UInt) -> UIColor {
+protocol TileAppearanceProviderProtocol {
+  func tileColorFor(value: UInt) -> UIColor
+  func numberColorFor(value: UInt) -> UIColor
+  func fontForNumbers() -> UIFont
+}
+
+class TileAppearanceProvider: NSObject, TileAppearanceProviderProtocol {
+   func tileColorFor(value: UInt) -> UIColor {
     switch value {
     case 2:
       return UIColor(red: 238.0 / 255, green: 228.0 / 255, blue: 218.0 / 255, alpha: 1)
