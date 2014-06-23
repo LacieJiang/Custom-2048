@@ -21,14 +21,14 @@ class TileView: UIView {
   var numberLabel: UILabel
 
 
-  init(postion: CGPoint, width: CGFloat, value: UInt, cornerRadius: CGFloat, delegate: TileAppearanceProviderProtocol) {
+  init(position: CGPoint, width: CGFloat, value: UInt, cornerRadius: CGFloat, delegate: TileAppearanceProviderProtocol) {
     self.delegate = delegate
     self.value = value
     numberLabel = UILabel(frame: CGRectMake(0, 0, width, width))
     numberLabel.textAlignment = NSTextAlignment.Center
     numberLabel.minimumScaleFactor = 0.5
     numberLabel.font = delegate.fontForNumbers()
-    super.init(frame: CGRectMake(postion.x, postion.y, width, width))
+    super.init(frame: CGRectMake(position.x, position.y, width, width))
     self.addSubview(numberLabel)
     backgroundColor = delegate.tileColorFor(value)
     numberLabel.textColor = delegate.numberColorFor(value)
