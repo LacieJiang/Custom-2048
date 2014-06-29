@@ -125,8 +125,9 @@ class NumberTileGameViewController: UIViewController, GameModelProtocol, Control
       if self.delegate {
         self.delegate!.gameFinishedWith(victory: true, score: self.gameModel.score)
       }
-      let alert = UIAlertView(title: "Victory!", message: "You won!", delegate: nil, cancelButtonTitle: "OK")
-      alert.show()
+//      let alert = UIAlertController(title: "Victory", message: "You won!", preferredStyle: .Alert)
+//      alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler:nil))
+//      self.presentViewController(alert, animated: true, completion: nil)
     } else {
       let rand = arc4random_uniform(10)
       if rand == 1 {
@@ -135,8 +136,9 @@ class NumberTileGameViewController: UIViewController, GameModelProtocol, Control
         self.gameModel.insertAtRandomLocationTileWith(2)
       }
       if self.gameModel.userHasLost() {
-        let alert = UIAlertView(title: "Defeat!", message: "You lost...", delegate: nil, cancelButtonTitle: "OK")
-        alert.show()
+//        let alert = UIAlertController(title: "Defeat!", message: "You lost...", preferredStyle: .Alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler:nil))
+//        self.presentViewController(alert, animated: true, completion: nil)
       }
     }
   }

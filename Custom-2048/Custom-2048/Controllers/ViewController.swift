@@ -21,7 +21,7 @@ class ViewController: UIViewController {
   }
 
   @IBAction func playGame(sender: UIButton) {
-    let controller: NumberTileGameViewController = NumberTileGameViewController(dimension: 4, threshold: 2048, bkgColor: UIColor.whiteColor(), scoreModuleEnabled: true, buttonControlEnabled: false, swipeControlsEnabled: true)
+    let controller: NumberTileGameViewController = NumberTileGameViewController(dimension: 4, threshold: 2048, bkgColor: UIColor.whiteColor(), scoreModuleEnabled: true, buttonControlEnabled: true, swipeControlsEnabled: true)
     self.presentViewController(controller, animated: true, completion: nil)
   }
 }

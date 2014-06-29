@@ -3,7 +3,6 @@
 //  Custom-2048
 //
 //  Created by Jiang Liyin on 14-6-22.
-//  Copyright (c) 2014年 liyinjiang. All rights reserved.
 //
 
 import UIKit
@@ -25,6 +24,7 @@ class ScoreView: UIView, ScoreViewProtocol {
   init(cornerRadius: CGFloat, backgroundColor bgColor: UIColor, textColor: UIColor, textFont: UIFont) {
     score = 0
     scoreLabel = UILabel(frame: defaultFrame)
+    scoreLabel.text = "SCORE: \(score)"
     scoreLabel.textAlignment = .Center
     if textColor != nil {
       scoreLabel.textColor = textColor
@@ -32,7 +32,7 @@ class ScoreView: UIView, ScoreViewProtocol {
     if textFont != nil {
       scoreLabel.font = textFont
     }
-    super.init(frame: frame)
+    super.init(frame: defaultFrame)
     self.addSubview(self.scoreLabel)
     layer.cornerRadius = cornerRadius
     backgroundColor = (bgColor != nil) ? bgColor : UIColor.whiteColor()

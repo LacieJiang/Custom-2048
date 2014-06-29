@@ -137,7 +137,7 @@ class GameboardView: UIView {
               animations: {() -> Void in
                 tileA.layer.setAffineTransform(CGAffineTransformIdentity)
               },
-              completion: {(Bool) -> Void in})
+              completion: nil)
         })
     })
   }
@@ -178,7 +178,7 @@ class GameboardView: UIView {
               animations: {() -> Void in
                 tile.layer.setAffineTransform(CGAffineTransformIdentity)
               },
-              completion: {(Bool) -> Void in})
+              completion: nil)
           })
       })
   }
