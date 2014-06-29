@@ -21,11 +21,12 @@ class ControlView: UIView {
   var moveButtonsEnabled: Bool = false
   var exitButtonEnabled: Bool = false
   var delegate: ControlViewProtocol
-  init(frame: CGRect, cornerRadius: CGFloat, backgroundColor bgColor: UIColor, movementButtonsEnabled: Bool, exitButtonEnabled: Bool, delegate: ControlViewProtocol) {
+  let defalutFrame = CGRectMake(0, 0, 230, 30)
+  init(cornerRadius: CGFloat, backgroundColor bgColor: UIColor, movementButtonsEnabled: Bool, exitButtonEnabled: Bool, delegate: ControlViewProtocol) {
     self.delegate = delegate
     self.moveButtonsEnabled = movementButtonsEnabled
     self.exitButtonEnabled = exitButtonEnabled
-    super.init(frame: frame)
+    super.init(frame: defalutFrame)
     backgroundColor = bgColor
     layer.cornerRadius = cornerRadius
   }

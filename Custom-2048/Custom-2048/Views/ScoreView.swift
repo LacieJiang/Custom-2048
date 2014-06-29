@@ -19,11 +19,12 @@ class ScoreView: UIView, ScoreViewProtocol {
   }
   }
 
+  let defaultFrame = CGRectMake(0, 0, 140, 40)
   var scoreLabel: UILabel
 
-  init(frame: CGRect, cornerRadius: CGFloat, backgroundColor bgColor: UIColor, textColor: UIColor, textFont: UIFont) {
+  init(cornerRadius: CGFloat, backgroundColor bgColor: UIColor, textColor: UIColor, textFont: UIFont) {
     score = 0
-    scoreLabel = UILabel(frame: frame)
+    scoreLabel = UILabel(frame: defaultFrame)
     scoreLabel.textAlignment = .Center
     if textColor != nil {
       scoreLabel.textColor = textColor

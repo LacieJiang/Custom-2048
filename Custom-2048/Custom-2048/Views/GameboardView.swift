@@ -3,7 +3,6 @@
 //  Custom-2048
 //
 //  Created by Jiang Liyin on 14-6-22.
-//  Copyright (c) 2014年 liyinjiang. All rights reserved.
 //
 
 import UIKit
@@ -95,6 +94,91 @@ class GameboardView: UIView {
         UIView.animateWithDuration(self.tileContractTime,
           animations: { () -> Void in
             tile.layer.setAffineTransform(CGAffineTransformIdentity)
+          })
+      })
+  }
+
+  func moveTwoTiles(one: (Int, Int), two: (Int, Int), to: (Int, Int), value: UInt) {
+    var startA: NSIndexPath = NSIndexPath(forRow: one.0, inSection: one.1)
+    var startB: NSIndexPath = NSIndexPath(forRow: two.0, inSection: two.1)
+    var end: NSIndexPath = NSIndexPath(forRow: to.0, inSection: to.1)
+    var tileA: TileView = self.boardTiles[startA]!
+    var tileB: TileView = self.boardTiles[startB]!
+    var x = self.padding + CGFloat(to.1) * (self.tileSideLength + self.padding)
+    var y = self.padding + CGFloat(to.0) * (self.tileSideLength + self.padding)
+    var finalFrame = tileA.frame
+    finalFrame.origin.x = x
+    finalFrame.origin.y = y
+    self.boardTiles.removeValueForKey(startA)
+    self.boardTiles.removeValueForKey(startB)
+    self.boardTiles[end] = tileA
+
+    UIView.animateWithDuration(perSquareSlideDuration,
+      delay: 0,
+      options: .BeginFromCurrentState,
+      animations: {() -> Void in
+        tileA.frame = finalFrame
+        tileB.frame = finalFrame
+      },
+      completion: {(finished: Bool) -> Void in
+        tileA.value = value
+        if !finished {
+          tileB.removeFromSuperview()
+          return
+        }
+        tileA.layer.setAffineTransform(CGAffineTransformMakeScale(self.tileMergeStartScale, self.tileMergeStartScale))
+        tileB.removeFromSuperview()
+        UIView.animateWithDuration(self.tileMergeExpandTime,
+          animations: {() -> Void in
+            tileA.layer.setAffineTransform(CGAffineTransformMakeScale(self.tilePopMaxScale, self.tilePopMaxScale))
+          },
+          completion: {(finished: Bool) -> Void in
+            UIView.animateWithDuration(self.tileMergeContractTime,
+              animations: {() -> Void in
+                tileA.layer.setAffineTransform(CGAffineTransformIdentity)
+              },
+              completion: {(Bool) -> Void in})
+        })
+    })
+  }
+
+  func moveOneTile(from: (Int, Int), to: (Int, Int), value: UInt) {
+    var start: NSIndexPath = NSIndexPath(forRow: from.0, inSection: from.1)
+    var end: NSIndexPath = NSIndexPath(forRow: to.0, inSection: to.1)
+    var tile: TileView = boardTiles[start]!
+    let endTile = boardTiles[end]
+    var shouldPop = (endTile != nil)
+    var x = self.padding + CGFloat(to.1) * (self.tileSideLength + self.padding)
+    var y = self.padding + CGFloat(to.0) * (self.tileSideLength + self.padding)
+    var finalFrame = tile.frame
+    finalFrame.origin.x = x
+    finalFrame.origin.y = y
+    self.boardTiles.removeValueForKey(start)
+    self.boardTiles[end] = tile
+
+    UIView.animateWithDuration(perSquareSlideDuration,
+      delay: 0,
+      options: .BeginFromCurrentState,
+      animations: {() -> Void in
+        tile.frame = finalFrame
+      },
+      completion: {(finished: Bool) -> Void in
+        tile.value = value
+        if !shouldPop || !finished {
+          return
+        }
+        tile.layer.setAffineTransform(CGAffineTransformMakeScale(self.tileMergeStartScale, self.tileMergeStartScale))
+        endTile?.removeFromSuperview()
+        UIView.animateWithDuration(self.tileMergeExpandTime,
+          animations: {() -> Void in
+            tile.layer.setAffineTransform(CGAffineTransformMakeScale(self.tilePopMaxScale, self.tilePopMaxScale))
+          },
+          completion: {(finished: Bool) -> Void in
+            UIView.animateWithDuration(self.tileMergeContractTime,
+              animations: {() -> Void in
+                tile.layer.setAffineTransform(CGAffineTransformIdentity)
+              },
+              completion: {(Bool) -> Void in})
           })
       })
   }

@@ -3,7 +3,6 @@
 //  Custom-2048
 //
 //  Created by liyinjiang on 6/17/14.
-//  Copyright (c) 2014 liyinjiang. All rights reserved.
 //
 
 import UIKit
@@ -22,7 +21,11 @@ protocol GameModelProtocol {
   func insertTile(at: (Int, Int), value: Int)
 }
 class GameModel: NSObject {
-  var score: Int = 0
+  var score: Int = 0 {
+  didSet {
+    self.delegate.scoreChanged(score)
+  }
+  }
 
   let dimension: Int
   let winValue: Int
@@ -39,7 +42,12 @@ class GameModel: NSObject {
     self.dimension = d
     self.winValue = w
     self.delegate = delegate
-    self.gameState = TileModel[](count: (d*d), repeatedValue: TileModel())
+    self.gameState = TileModel[]()
+    for i in 0..dimension {
+      for j in 0..dimension {
+        self.gameState.append(TileModel())
+      }
+    }
 
     self.commandQueue = MoveCommand[]()
     self.timer = NSTimer()
@@ -52,6 +60,38 @@ class GameModel: NSObject {
     self.timer.invalidate()
   }
 
+
+  func userHasWon() -> (Int, Int)? {
+    for i in 0..self.gameState.count {
+      let tileModel = self.gameState[i];
+      if tileModel.value == self.winValue {
+        return (i / self.dimension, i % self.dimension)
+      }
+    }
+    return nil
+  }
+
+  func userHasLost() -> Bool {
+    for i in 0..self.gameState.count {
+      if self.gameState[i].empty {
+        return false
+      }
+    }
+    for i in 0..self.dimension {
+      for j in 0..self.dimension {
+        let tile = self.tileFor((i, j))
+        if (j != self.dimension - 1
+          && tile.value == self.tileFor((i, j + 1)).value) {
+            return false
+        }
+        if (i != self.dimension - 1
+          && tile.value == self.tileFor((i + 1, j)).value) {
+            return false
+        }
+      }
+    }
+    return true
+  }
 // insert
   func insertAtRandomLocationTileWith(value: Int) {
     var openSpots = gameboardEmptySpots()
@@ -64,7 +104,7 @@ class GameModel: NSObject {
   }
 
   func insertTile(at: (Int, Int), value: Int) {
-    var tileModel = self.tileFor(at)
+    let tileModel = self.tileFor(at)
     if (!tileModel.empty) {
       return
     }
@@ -248,11 +288,11 @@ class GameModel: NSObject {
     let command = MoveCommand(moveDirection: d, completionFunc: t)
     self.commandQueue.append(command)
     if !timer.valid {
-      self.timerFired(timer: timer)
+      self.timerFired(timer)
     }
   }
 
-  func timerFired(#timer: NSTimer) {
+  func timerFired(timer: NSTimer) {
     if self.commandQueue.count == 0 { return }
     var changed = false
     while self.commandQueue.count > 0 {
@@ -372,7 +412,7 @@ class GameModel: NSObject {
     var openSpots = Array<(Int, Int)>()
     for i in 0..self.dimension {
       for j in 0..self.dimension {
-        var tileModel = self.tileFor((i, j))
+        let tileModel = self.tileFor((i, j))
         if (tileModel.empty) {
           openSpots += (i, j)
         }
@@ -381,8 +421,8 @@ class GameModel: NSObject {
     return openSpots
   }
 
-  func tileFor(position: (Int, Int)) ->TileModel {
+  func tileFor(position: (Int, Int)) -> TileModel {
     let idx: Int = position.0 * self.dimension + position.1
-    return self.gameState[idx]
+    return gameState[idx]
   }
 }

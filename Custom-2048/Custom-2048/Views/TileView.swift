@@ -30,6 +30,7 @@ class TileView: UIView {
     numberLabel.font = delegate.fontForNumbers()
     super.init(frame: CGRectMake(position.x, position.y, width, width))
     self.addSubview(numberLabel)
+    self.layer.cornerRadius = cornerRadius
     backgroundColor = delegate.tileColorFor(value)
     numberLabel.textColor = delegate.numberColorFor(value)
     numberLabel.text = "\(value)"
